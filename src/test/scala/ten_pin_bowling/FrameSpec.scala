@@ -20,6 +20,10 @@ class FrameSpec extends FunSpec with MustMatchers {
     it("is spare when no pins were knocked down") {
       Frame(0, 0).isSpare mustBe false
     }
+
+    it("sum results on both strikes") {
+      Frame(2, 3).score mustBe 5
+    }
   }
 
 }
