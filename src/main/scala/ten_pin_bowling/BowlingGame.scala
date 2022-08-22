@@ -1,21 +1,24 @@
 package ten_pin_bowling
 
+import scala.annotation.tailrec
+
 case class BowlingGame() {
 
-  def perfectGame() = repeatFrame(10, 0, 12)
+  def perfectGame(): Unit = repeatFrame(10, 0, 12)
 
   private var frames = List[Frame]()
 
-  def addFrame(first: Int, second: Int) =
+  def addFrame(first: Int, second: Int): Unit =
     frames = Frame(first, second) :: frames
 
-  def addStrike = addFrame(10, 0)
+  def addStrike(): Unit = addFrame(10, 0)
 
-  def repeatFrame(first: Int, second: Int, times: Int) =
+  def repeatFrame(first: Int, second: Int, times: Int): Unit =
     for (_ <- 1 to times)
       addFrame(first, second)
 
   def score: Int = {
+    @tailrec
     def score(soFar: Int, rest: List[Frame]): Int = {
       rest match {
         case frame1 :: frame2 :: rest =>
@@ -31,5 +34,4 @@ case class BowlingGame() {
     }
     score(0, frames)
   }
-
 }
