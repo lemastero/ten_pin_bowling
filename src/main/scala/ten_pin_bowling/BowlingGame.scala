@@ -4,18 +4,19 @@ import scala.annotation.tailrec
 
 case class BowlingGame(frames: List[Frame] = Nil) {
 
-  def perfectGame(): Unit = repeatFrame(10, 0, 12)
+  def perfectGame(): BowlingGame =
+    repeatFrame(Frame.Strike, 12)
 
-  def addFrame(first: Int, second: Int): BowlingGame =
-    BowlingGame(Frame(first, second) :: frames)
+  def addFrame(frame: Frame): BowlingGame =
+    BowlingGame(frame :: frames)
 
-  def addStrike(): BowlingGame = addFrame(10, 0)
+  def addStrike(): BowlingGame =
+    addFrame(Frame.Strike)
 
-  def repeatFrame(first: Int, second: Int, times: Int): BowlingGame = {
+  def repeatFrame(frame: Frame, times: Int): BowlingGame =
     (1 to times).foldLeft(this){ case(elem, _) =>
-      elem.addFrame(first, second)
+      elem.addFrame( frame )
     }
-  }
 
   def score: Int = {
     @tailrec
