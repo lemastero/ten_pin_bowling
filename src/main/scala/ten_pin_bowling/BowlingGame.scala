@@ -2,20 +2,20 @@ package ten_pin_bowling
 
 import scala.annotation.tailrec
 
-case class BowlingGame() {
+case class BowlingGame(frames: List[Frame] = Nil) {
 
   def perfectGame(): Unit = repeatFrame(10, 0, 12)
 
-  private var frames = List[Frame]()
+  def addFrame(first: Int, second: Int): BowlingGame =
+    BowlingGame(Frame(first, second) :: frames)
 
-  def addFrame(first: Int, second: Int): Unit =
-    frames = Frame(first, second) :: frames
+  def addStrike(): BowlingGame = addFrame(10, 0)
 
-  def addStrike(): Unit = addFrame(10, 0)
-
-  def repeatFrame(first: Int, second: Int, times: Int): Unit =
-    for (_ <- 1 to times)
-      addFrame(first, second)
+  def repeatFrame(first: Int, second: Int, times: Int): BowlingGame = {
+    (1 to times).foldLeft(this){ case(elem, _) =>
+      elem.addFrame(first, second)
+    }
+  }
 
   def score: Int = {
     @tailrec

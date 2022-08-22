@@ -4,7 +4,7 @@ case class Frame(first: Int, second:Int) {
 
   def score: Int = first + second
 
-  def isSpare: Boolean = (first + second) == 10
+  def isSpare: Boolean = score == 10
 
   def isStrike: Boolean = first == 10
 }
