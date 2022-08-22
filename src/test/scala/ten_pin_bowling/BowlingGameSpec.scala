@@ -1,8 +1,9 @@
 package ten_pin_bowling
 
-import org.scalatest.{MustMatchers, FunSpec}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
-class BowlingGameSpec extends FunSpec with MustMatchers {
+class BowlingGameSpec extends AnyFunSpec with Matchers {
 
   describe("Bowling Game score") {
 
@@ -35,7 +36,5 @@ class BowlingGameSpec extends FunSpec with MustMatchers {
 
       game.score mustBe 30
     }
-
   }
-
 }

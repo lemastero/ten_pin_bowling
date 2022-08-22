@@ -1,10 +1,12 @@
 package ten_pin_bowling
 
-import org.scalatest.{MustMatchers, FunSpec}
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.must.Matchers
 
-class FrameSpec extends FunSpec with MustMatchers {
+class FrameSpec extends AnyFunSpec with Matchers {
 
   describe("Frame") {
+
     it("is strike when all ten pins are knocked down with the first ball ") {
       Frame(10, 0).isStrike mustBe true
     }
@@ -25,5 +27,4 @@ class FrameSpec extends FunSpec with MustMatchers {
       Frame(2, 3).score mustBe 5
     }
   }
-
 }
